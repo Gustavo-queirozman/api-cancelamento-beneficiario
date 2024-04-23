@@ -12,6 +12,6 @@ class ListarController
 
     public function __invoke()
     {
-              
+            
     }
 }
