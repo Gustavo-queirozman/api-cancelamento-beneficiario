@@ -35,4 +35,5 @@ Route::post('reset', [AuthController::class, 'reset']);
 Route::middleware('auth:api')->group(function () {
     Route::get('usuarios', AllController::class);
     Route::post('usuario/{id}', DeleteController::class);
+    Route::post('usuario/{id}', EditController::class);
 });
