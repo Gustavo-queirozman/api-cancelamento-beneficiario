@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Usuario\AllController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,5 +32,6 @@ Route::post('reset', [AuthController::class, 'reset']);
 
 
 Route::middleware('auth:api')->group(function () {
-
+    Route::get('usuarios', AllController::class);
+    
 });
