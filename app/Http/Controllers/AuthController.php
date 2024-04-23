@@ -44,7 +44,6 @@ class AuthController extends BaseController
         $success['token'] =  $user->createToken('MyApp')->accessToken;
         $success['name'] =  $user->name;
 
-        session(['cnp' => $user->cnp]);
         return $this->sendResponse($success, 'User register successfully.');
     }
 
