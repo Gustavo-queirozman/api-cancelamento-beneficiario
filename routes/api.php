@@ -3,6 +3,8 @@
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Usuario\AllController;
+use App\Http\Controllers\Usuario\DeleteController;
+use App\Http\Controllers\Usuario\EditController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,8 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 */
 
 
-Route::post('login', [AuthController::class, 'login'])->name('login');
-Route::get('login', [AuthController::class, 'login'])->name('login');
+
 Route::post('register', [AuthController::class, 'register']);
 Route::post('forgot', [AuthController::class, 'forgot']);
 Route::post('reset', [AuthController::class, 'reset']);
@@ -33,5 +34,5 @@ Route::post('reset', [AuthController::class, 'reset']);
 
 Route::middleware('auth:api')->group(function () {
     Route::get('usuarios', AllController::class);
-    
+    Route::post('usuario/{id}', DeleteController::class);
 });
