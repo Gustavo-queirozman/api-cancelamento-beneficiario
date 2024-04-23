@@ -11,9 +11,8 @@ class DeleteController
 {
     use AsAction;
 
-    public function __invoke(Request $request)
+    public function __invoke(Request $reques,$id)
     {
-        $id = $request->input('id');
         $usuario = User::find($id);
         $usuario->delete();
         return response()->json(["message"=>"deletado com sucesso!"],202);

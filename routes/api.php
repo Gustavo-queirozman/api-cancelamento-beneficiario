@@ -25,7 +25,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 */
 
 
-
+//Route::post('login', [AuthController::class, 'login'])->name('login');
+//Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('register', [AuthController::class, 'register']);
 Route::post('forgot', [AuthController::class, 'forgot']);
 Route::post('reset', [AuthController::class, 'reset']);
@@ -34,6 +35,8 @@ Route::post('reset', [AuthController::class, 'reset']);
 
 Route::middleware('auth:api')->group(function () {
     Route::get('usuarios', AllController::class);
-    Route::post('usuario/{id}', DeleteController::class);
     Route::post('usuario/{id}', EditController::class);
+    Route::delete('usuario/{id}', DeleteController::class);
+
+
 });
