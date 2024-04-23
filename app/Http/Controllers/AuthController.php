@@ -55,8 +55,7 @@ class AuthController extends BaseController
      */
     public function login(Request $request): JsonResponse
     {
-        DB::setDefaultConnection('SegundaVia');
-        if (Auth::attempt(['cnp' => $request->cnp, 'password' => $request->password])) {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
             $success['token'] =  $user->createToken('MyApp')->accessToken;
             $success['name'] =  $user->name;
