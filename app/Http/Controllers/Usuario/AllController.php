@@ -13,7 +13,7 @@ class AllController
 
     public function __invoke()
     {
-        $usuarios = User::all()->get('id');
+        $usuarios = User::all();
         return response()->json([
             "usuarios" => $usuarios
         ],202);
