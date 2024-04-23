@@ -25,6 +25,8 @@ class User extends Authenticatable
         'cnp',
         'email',
         'password',
+        'is_admin',
+        'blocked'
     ];
 
     /**

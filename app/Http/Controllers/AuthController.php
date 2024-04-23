@@ -27,10 +27,11 @@ class AuthController extends BaseController
 
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'cnp' => 'required|unique:users',
             'email' => 'required|email|unique:users', // Added unique validation
             'password' => 'required',
             'c_password' => 'required|same:password',
+            'is_admin' => 'required',
+            'blocked' => 'required'
         ]);
 
         if ($validator->fails()) {
