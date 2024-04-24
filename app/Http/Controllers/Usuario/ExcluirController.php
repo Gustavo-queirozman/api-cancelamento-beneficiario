@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 
-class DeleteController
+class ExcluirController extends Controller
 {
     use AsAction;
 
