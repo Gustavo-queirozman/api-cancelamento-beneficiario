@@ -7,6 +7,7 @@ use App\Http\Controllers\Solicitacao\Beneficiario\ListarController;
 use App\Http\Controllers\Usuario\AllController;
 use App\Http\Controllers\Usuario\DeleteController;
 use App\Http\Controllers\Usuario\EditController;
+use App\Http\Controllers\Usuario\ListarController as UsuarioListarController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,7 +37,7 @@ Route::post('reset', [AuthController::class, 'reset']);
 
 
 Route::middleware('auth:api')->group(function () {
-    Route::get('usuarios', AllController::class);
+    Route::get('usuarios', UsuarioListarController::class);
     Route::post('usuario/{id}', EditController::class);
     Route::delete('usuario/{id}', DeleteController::class);
 
