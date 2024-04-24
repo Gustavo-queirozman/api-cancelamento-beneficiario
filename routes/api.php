@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Cancelamento\CriarController;
 use App\Http\Controllers\Solicitacao\Beneficiario\ListarController;
 use App\Http\Controllers\Usuario\AllController;
 use App\Http\Controllers\Usuario\DeleteController;
@@ -41,4 +42,5 @@ Route::middleware('auth:api')->group(function () {
 
 
     Route::get('solicitar-cancelamento', ListarController::class);
+    Route::post('fazer-cancelamento', CriarController::class);
 });
