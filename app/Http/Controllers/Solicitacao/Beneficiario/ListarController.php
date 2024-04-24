@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Solicitacao;
+namespace App\Http\Controllers\Solicitacao\Beneficiario;
 
 use App\Http\Controllers\Controller;
-use App\Models\Beneficiario;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
+use App\Models\Beneficiario;
 
-class ListarController
+class ListarController extends Controller
 {
     use AsAction;
 
     public function __invoke(Request $request)
     {
-        $beneficiarios = new Beneficiario();
-        $dependentes = $beneficiarios->selectDependentes($request->input('codigoCarteirinha'));
+        $beneficiarios = new Beneficiario;
+        $dependentes = $beneficiarios->selectBeneficiarios($request->input('codigoCarteirinha'));
 
         return response()->json([
             'dependentes'=> $dependentes

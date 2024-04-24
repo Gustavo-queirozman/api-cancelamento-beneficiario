@@ -10,8 +10,8 @@ class Beneficiario extends Model
 {
     use HasFactory;
 
-    public function selectDependentes($codigoCarteirinha){
-        $dependentes = DB::select("select Pessoa.Nome,
+    public function selectBeneficiarios($codigoCarteirinha){
+        return DB::select("select Pessoa.Nome,
         Beneficiario.Codigo,
         Pessoa.Cnp,
         CASE
@@ -21,6 +21,5 @@ class Beneficiario extends Model
         from Beneficiario
         INNER JOIN Pessoa ON Pessoa.AutoId = Beneficiario.Pessoa
         WHERE Beneficiario.Titular = (SELECT AutoId FROM BENEFICIARIO WHERE Beneficiario.Codigo = '$codigoCarteirinha')");
-        return $dependentes;
     }
 }
