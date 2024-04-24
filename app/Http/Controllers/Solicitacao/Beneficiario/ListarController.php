@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use App\Models\Beneficiario;
 
-class ListarController extends Controller
+class ListarController
 {
     use AsAction;
 
