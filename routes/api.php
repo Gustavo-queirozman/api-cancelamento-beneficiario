@@ -4,9 +4,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Cancelamento\CriarController;
 use App\Http\Controllers\Solicitacao\Beneficiario\ListarController;
-use App\Http\Controllers\Usuario\AllController;
 use App\Http\Controllers\Usuario\DeleteController;
-use App\Http\Controllers\Usuario\EditController;
+use App\Http\Controllers\Usuario\EditarController;
 use App\Http\Controllers\Usuario\ListarController as UsuarioListarController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,7 +37,7 @@ Route::post('reset', [AuthController::class, 'reset']);
 
 Route::middleware('auth:api')->group(function () {
     Route::get('usuarios', UsuarioListarController::class);
-    Route::post('usuario/{id}', EditController::class);
+    Route::post('usuario/{id}', EditarController::class);
     Route::delete('usuario/{id}', DeleteController::class);
 
 
