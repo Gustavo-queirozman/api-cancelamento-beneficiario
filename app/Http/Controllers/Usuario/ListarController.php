@@ -7,11 +7,11 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 
-class AllController
+class ListarController extends Controller
 {
     use AsAction;
 
-    public function __invoke()
+    public function __invoke(Request $request)
     {
         $usuarios = User::all();
         return response()->json([
