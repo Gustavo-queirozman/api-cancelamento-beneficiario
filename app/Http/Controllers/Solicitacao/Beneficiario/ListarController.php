@@ -14,10 +14,10 @@ class ListarController extends Controller
     public function __invoke(Request $request)
     {
         $beneficiarios = new Beneficiario;
-        $dependentes = $beneficiarios->selectBeneficiarios($request->input('codigoCarteirinha'));
+        $beneficiarios = $beneficiarios->selectBeneficiarios($request->input('codigoCarteirinha'));
 
         return response()->json([
-            'dependentes'=> $dependentes
+            'beneficiarios'=> $beneficiarios
         ]);
     }
 }
