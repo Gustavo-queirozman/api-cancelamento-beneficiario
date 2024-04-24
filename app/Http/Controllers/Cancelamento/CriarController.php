@@ -12,9 +12,7 @@ class CriarController
 
     public function __invoke(Request $request)
     {
-        $cancelamento = Cancelamento::create([
-            $request->all()
-        ]);
+        Cancelamento::create($request->all());
 
         return response()->json([
             "message" => "Cancelamento realizado conforme solicitado"
