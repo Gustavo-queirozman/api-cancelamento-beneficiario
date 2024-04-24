@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Solicitacao\ListarController;
+use App\Http\Controllers\Solicitacao\Beneficiario\ListarController;
 use App\Http\Controllers\Usuario\AllController;
 use App\Http\Controllers\Usuario\DeleteController;
 use App\Http\Controllers\Usuario\EditController;
@@ -40,5 +40,5 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('usuario/{id}', DeleteController::class);
 
 
-    Route::get('solicitacao', ListarController::class);
+    Route::get('solicitar-cancelamento', ListarController::class);
 });
