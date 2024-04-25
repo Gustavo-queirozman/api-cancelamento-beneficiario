@@ -11,16 +11,16 @@ class Beneficiario extends Model
     use HasFactory;
 
     public function selectBeneficiarios($codigoCarteirinha){
-        Db::connection('Cardio');
+        Db::setDefaultConnection('Cardio');
         return DB::select("select Pessoa.Nome,
         Beneficiario.Codigo,
         Pessoa.Cnp,
         CASE
-            WHEN (SELECT AutoId FROM BENEFICIARIO WHERE Beneficiario.Codigo = '$codigoCarteirinha') = Beneficiario.AutoId THEN 'true'
-            WHEN (SELECT AutoId FROM BENEFICIARIO WHERE Beneficiario.Codigo = '$codigoCarteirinha') != Beneficiario.AutoId THEN 'falso'
+            WHEN (SELECT AutoId FROM BENEFICIARIO WHERE Beneficiario.Codigo = '2267004000193004') = Beneficiario.AutoId THEN 'true'
+            WHEN (SELECT AutoId FROM BENEFICIARIO WHERE Beneficiario.Codigo = '2267004000193004') != Beneficiario.AutoId THEN 'falso'
         END AS 'Titular'
         from Beneficiario
         INNER JOIN Pessoa ON Pessoa.AutoId = Beneficiario.Pessoa
-        WHERE Beneficiario.Titular = (SELECT AutoId FROM BENEFICIARIO WHERE Beneficiario.Codigo = '$codigoCarteirinha')");
+        WHERE Beneficiario.Titular = (SELECT AutoId FROM BENEFICIARIO WHERE Beneficiario.Codigo = '2267004000193004')");
     }
 }
