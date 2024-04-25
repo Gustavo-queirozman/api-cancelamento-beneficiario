@@ -12,13 +12,13 @@ class Beneficiario extends Model
 
     public function selectBeneficiarios($codigoCarteirinha){
         Db::setDefaultConnection('Cardio');
-        return DB::select("select Pessoa.Nome,
-        Beneficiario.Codigo,
-        Pessoa.Cnp,
+        return DB::select("select Pessoa.Nome as nome,
+        Beneficiario.Codigo as 'codigo_carteirinha',
+        Pessoa.Cnp as cnp,
         CASE
-            WHEN (SELECT AutoId FROM BENEFICIARIO WHERE Beneficiario.Codigo = '2267004000193004') = Beneficiario.AutoId THEN 'true'
+            WHEN (SELECT AutoId FROM BENEFICIARIO WHERE Beneficiario.Codigo = '2267004000193004') = Beneficiario.AutoId THEN 'verdadeiro'
             WHEN (SELECT AutoId FROM BENEFICIARIO WHERE Beneficiario.Codigo = '2267004000193004') != Beneficiario.AutoId THEN 'falso'
-        END AS 'Titular'
+        END AS 'titular'
         from Beneficiario
         INNER JOIN Pessoa ON Pessoa.AutoId = Beneficiario.Pessoa
         WHERE Beneficiario.Titular = (SELECT AutoId FROM BENEFICIARIO WHERE Beneficiario.Codigo = '2267004000193004')");
