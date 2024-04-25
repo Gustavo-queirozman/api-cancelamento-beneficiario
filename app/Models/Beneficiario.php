@@ -16,11 +16,11 @@ class Beneficiario extends Model
         Beneficiario.Codigo as 'codigo_carteirinha',
         Pessoa.Cnp as cnp,
         CASE
-            WHEN (SELECT AutoId FROM BENEFICIARIO WHERE Beneficiario.Codigo = '2267004000193004') = Beneficiario.AutoId THEN 'verdadeiro'
-            WHEN (SELECT AutoId FROM BENEFICIARIO WHERE Beneficiario.Codigo = '2267004000193004') != Beneficiario.AutoId THEN 'falso'
+            WHEN (SELECT AutoId FROM BENEFICIARIO WHERE Beneficiario.Codigo = '$codigoCarteirinha') = Beneficiario.AutoId THEN 'verdadeiro'
+            WHEN (SELECT AutoId FROM BENEFICIARIO WHERE Beneficiario.Codigo = '$codigoCarteirinha') != Beneficiario.AutoId THEN 'falso'
         END AS 'titular'
         from Beneficiario
         INNER JOIN Pessoa ON Pessoa.AutoId = Beneficiario.Pessoa
-        WHERE Beneficiario.Titular = (SELECT AutoId FROM BENEFICIARIO WHERE Beneficiario.Codigo = '2267004000193004')");
+        WHERE Beneficiario.Titular = (SELECT AutoId FROM BENEFICIARIO WHERE Beneficiario.Codigo = '$codigoCarteirinha')");
     }
 }

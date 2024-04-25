@@ -42,6 +42,6 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('usuario/{id}', ExcluirController::class);
 
 
-    Route::get('solicitar-cancelamento', ListarController::class);
+    Route::post('solicitar-cancelamento', ListarController::class);
     Route::post('fazer-cancelamento', CriarController::class);
 });
