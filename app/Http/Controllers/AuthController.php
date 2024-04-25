@@ -62,7 +62,7 @@ class AuthController extends BaseController
             session()->put('cnp', $user->cnp);
             return $this->sendResponse($success, 'User login successfully.');
         } else {
-            return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
+            return $this->sendError('Usuário ou senha incorretos', ['error' => 'Usuário ou senha incorretos']);
         }
     }
 
