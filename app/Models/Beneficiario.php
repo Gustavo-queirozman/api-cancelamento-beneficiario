@@ -13,7 +13,7 @@ class Beneficiario extends Model
     public function selectBeneficiarios($codigoCarteirinha){
         Db::setDefaultConnection('Cardio');
         return DB::select("select Pessoa.Nome as nome,
-        Beneficiario.Codigo as 'codigo_carteirinha',
+        Beneficiario.Codigo as 'codigoCarteirinha',
         Pessoa.Cnp as cnp,
         CASE
             WHEN (SELECT AutoId FROM BENEFICIARIO WHERE Beneficiario.Codigo = '$codigoCarteirinha') = Beneficiario.AutoId THEN 'verdadeiro'
