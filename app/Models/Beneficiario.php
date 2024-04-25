@@ -11,6 +11,7 @@ class Beneficiario extends Model
     use HasFactory;
 
     public function selectBeneficiarios($codigoCarteirinha){
+        Db::connection('Cardio');
         return DB::select("select Pessoa.Nome,
         Beneficiario.Codigo,
         Pessoa.Cnp,
