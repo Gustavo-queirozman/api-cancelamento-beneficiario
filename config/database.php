@@ -95,7 +95,7 @@ return [
 
 
 
-        'SegundaVia' => [
+        'Cancelamento' => [
             'driver' => 'sqlsrv',
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '-'),
