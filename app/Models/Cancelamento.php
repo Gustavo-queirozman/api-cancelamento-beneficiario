@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Cancelamento extends Model
 {
@@ -12,12 +13,17 @@ class Cancelamento extends Model
     protected $table = "cancelamentos";
 
     protected $fillable = [
+        'protocolo',
+        'contrato',
         'motivo',
+        'situacao_cancelamento',
         'email',
         'aceitou_termo_cancelamento',
-        'carteirinha_beneficiario',
         'ddd',
         'telefone',
-        'observacao'
+        'observacao',
+        'users_id',
+        'termos_cancelamento_id',
+        'tipos_de_atendimento_id'
     ];
 }

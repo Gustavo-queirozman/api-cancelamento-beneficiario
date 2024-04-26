@@ -17,17 +17,11 @@ return new class extends Migration
             $table->string('contrato',10);
             $table->boolean('situacao_cancelamento');
             $table->string('motivo');
-            $table->string('cep',8);
-            $table->string('bairro',50);
-            $table->string('endereco');
-            $table->string('cidade',15);
             $table->string('email');
             $table->boolean('aceitou_termo_cancelamento');
-            $table->boolean('comprovante_endereco');
-            $table->string('carteirinha_beneficiario',50);
+            $table->string('ddd',2);
             $table->string('telefone', 9);
             $table->string('observacao');
-            $table->string('ddd',2);
             $table->unsignedBigInteger('users_id');
             $table->unsignedBigInteger('termos_cancelamento_id');
             $table->unsignedBigInteger('tipos_de_atendimento_id');

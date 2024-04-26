@@ -23,4 +23,21 @@ class Beneficiario extends Model
         INNER JOIN Pessoa ON Pessoa.AutoId = Beneficiario.Pessoa
         WHERE Beneficiario.Titular = (SELECT AutoId FROM BENEFICIARIO WHERE Beneficiario.Codigo = '$codigoCarteirinha')");
     }
+
+    public function selectBeneficiariosAutoId($codigosCarteirinha){
+        DB::setDefaultConnection('Cardio');
+        return DB::select("SELECT AutoId AS 'autoid_beneficiario' FROM BENEFICIARIO WHERE Beneficiario.Codigo IN ($codigosCarteirinha);");
+    }
+
+    public function insertBeneficiario($beneficiario){
+        DB::setDefaultConnection('Cancelamento');
+        return DB::table('beneficiarios')->insert([
+            $beneficiario
+        ]);
+    }
+
+    protected $fillable = [
+        'autoid_beneficiario',
+        'cancelamentos_id'
+    ];
 }

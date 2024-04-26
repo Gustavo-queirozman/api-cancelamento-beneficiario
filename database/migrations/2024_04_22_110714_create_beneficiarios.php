@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('beneficiarios', function (Blueprint $table) {
             $table->id();
-            $table->string('caminho_termo');
+            $table->string('autoid_beneficiario');
             $table->unsignedBigInteger('cancelamentos_id');
             $table->timestamps();
 
