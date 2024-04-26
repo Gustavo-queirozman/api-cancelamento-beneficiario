@@ -35,17 +35,14 @@ class CriarController
         $cancelamento = Cancelamento::create($cancelamento);
 
         foreach ($beneficiarios as $beneficiario) {
+
             $beneficiario = array_merge(json_decode(json_encode($beneficiario), true), array('cancelamentos_id' => $cancelamento->id));
             $teste = new Beneficiario;
-            if ($teste->insertBeneficiario($beneficiario) == true) {
-                return response()->json([
-                    "message" => "Cancelado com sucesso!"
-                ], 202);
-            } else {
-                return response()->json([
-                    "message" => "Error não cancelado!"
-                ], 202);
-            }
+            $teste->insertBeneficiario($beneficiario);
         }
+
+        return response()->json([
+            "message" => "Cancelado com sucesso!"
+        ], 202);
     }
 }
