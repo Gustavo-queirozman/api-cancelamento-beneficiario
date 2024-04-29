@@ -12,30 +12,47 @@ class EditarController
 {
     use AsAction;
 
-    public function __invoke(Request $request, $id)
+    private $copiaEmail;
+
+    public function __invoke(Request $dadosDoFormulario, $id)
     {
-        $request->validate([
-            'nome' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
-            'situacao' => 'boolean'
-        ]);
+        $this->validaDados($dadosDoFormulario);
 
-        $copiaEmail = CopiaEmail::find($id);
-
-        if (!$copiaEmail) {
+        if (!$this->pesquisaConfiguracaoCopiaEmail($id)) {
             return response()->json([
                 "error" => "Cópia de email não encontrada."
             ], 404);
         }
 
-        $copiaEmail->nome = $request->input('nome');
-        $copiaEmail->email = $request->input('email');
-        $copiaEmail->situacao = bcrypt($request->input('situacao'));
-        $copiaEmail->users_id = Auth::user()->id;
-        $copiaEmail->save();
+        try{
+            $this->editaConfiguracaoCopiaEmailNoBancoDeDados($dadosDoFormulario);
+            return response()->json([
+                "message" => "Configuração editada com sucesso!"
+            ]);
+        }catch(\Exception $error){
+            return response()->json([
+                "error" => $error
+            ]);
+        }
+    }
 
-        return response()->json([
-            "message" => "Configuração editada com sucesso!"
+    private function validaDados($dadosDoFormulario){
+        return $dadosDoFormulario->validate([
+            'nome' => 'required|max:255',
+            'email' => 'required|email|unique:copias_de_email|max:256',
+            'situacao' => 'required|integer|between:0,1'
         ]);
+    }
+
+    private function pesquisaConfiguracaoCopiaEmail($id){
+        $this->copiaEmail = CopiaEmail::find($id);
+    }
+
+    private function editaConfiguracaoCopiaEmailNoBancoDeDados($dadosDoFormulario){
+        $this->copiaEmail->nome = $dadosDoFormulario->input('nome');
+        $this->copiaEmail->email = $dadosDoFormulario->input('email');
+        $this->copiaEmail->situacao = $dadosDoFormulario->input('situacao');
+        $this->copiaEmail->users_id = Auth::user()->id;
+        $this->copiaEmail->save();
     }
 }
