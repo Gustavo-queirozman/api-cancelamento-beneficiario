@@ -6,6 +6,7 @@ use App\Http\Controllers\Cancelamento\CriarController;
 use App\Http\Controllers\Cancelamento\ListarController as CancelamentoListarController;
 use App\Http\Controllers\Configuracao\CopiaEmail\CriarController as CopiaEmailCriarController;
 use App\Http\Controllers\Configuracao\CopiaEmail\EditarController as CopiaEmailEditarController;
+use App\Http\Controllers\Configuracao\CopiaEmail\ExcluirController as CopiaEmailExcluirController;
 use App\Http\Controllers\Configuracao\CopiaEmail\ListarController as CopiaEmailListarController;
 use App\Http\Controllers\Solicitacao\Beneficiario\ListarController;
 use App\Http\Controllers\TermoCancelamento\CriarController as TermoCancelamentoCriarController;
@@ -53,9 +54,9 @@ Route::middleware('auth:api')->group(function () {
     Route::get('usuarios', UsuarioListarController::class)->middleware('admin');
     Route::post('usuario/{id}', EditarController::class)->middleware('admin');
     Route::delete('usuario/{id}', ExcluirController::class)->middleware('admin');
-    
+
     Route::get('copias-email', CopiaEmailListarController::class)->middleware('admin');
     Route::post('copia-email', CopiaEmailCriarController::class)->middleware('admin');
     Route::post('copia-email/{id}', CopiaEmailEditarController::class)->middleware('admin');
-    Route::delete('copia-email/{id}', CopiaEmailEditarController::class)->middleware('admin');
+    Route::delete('copia-email/{id}', CopiaEmailExcluirController::class)->middleware('admin');
 });
