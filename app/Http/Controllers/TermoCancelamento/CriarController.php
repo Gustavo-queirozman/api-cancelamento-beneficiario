@@ -14,14 +14,33 @@ class CriarController
 {
     use AsAction;
 
-    public function __invoke(Request $request)
+    public function __invoke(Request $dadosDoFormulario)
     {
         DB::setDefaultConnection('Cancelamento');
+        $nomeDoArquivo = $this->gerarNomeParaArquivo();
+        $this->geraArquivoHtml($nomeDoArquivo, $dadosDoFormulario);
+        try{
+            $this->salvaTermoCancelamentoNoBancoDeDados($nomeDoArquivo);
+        }catch(\Exception $error){
+            return response()->json([
+                "error" => $error
+            ]);
+        }
+    }
+
+    private function gerarNomeParaArquivo(){
+        $nomeDoArquivo = Carbon::now()->format('YmdHmsv').".html";
+        return"storage/termosCancelamento/$nomeDoArquivo";
+    }
+
+    private function geraArquivoHtml($nomeDoArquivo, $request){
         ob_start();
-        $caminhoParaSalvarArquivo = "storage/termosCancelamento/".Carbon::now()->format('YmdHmsv').".html";
-        file_put_contents($caminhoParaSalvarArquivo,$request->input('html'));
+        file_put_contents($nomeDoArquivo,$request->input('html'));
+    }
+
+    private function salvaTermoCancelamentoNoBancoDeDados($nomeDoArquivo){
         TermoCancelamento::insert([
-            'caminho_termo' => $caminhoParaSalvarArquivo,
+            'caminho_termo' => "storage/termosCancelamento/$nomeDoArquivo",
             'users_id' => Auth::user()->id
         ]);
     }
