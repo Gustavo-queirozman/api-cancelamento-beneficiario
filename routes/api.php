@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Cancelamento\CriarController;
 use App\Http\Controllers\Cancelamento\ListarController as CancelamentoListarController;
 use App\Http\Controllers\Configuracao\CopiaEmail\CriarController as CopiaEmailCriarController;
+use App\Http\Controllers\Configuracao\CopiaEmail\ListarController as CopiaEmailListarController;
 use App\Http\Controllers\Solicitacao\Beneficiario\ListarController;
 use App\Http\Controllers\TermoCancelamento\CriarController as TermoCancelamentoCriarController;
 use App\Http\Controllers\Usuario\DeleteController;
@@ -50,4 +51,5 @@ Route::middleware('auth:api')->group(function () {
     Route::post('fazer-cancelamento', CriarController::class);
     Route::post('termo-cancelamento', TermoCancelamentoCriarController::class);
     Route::post('copia-email', CopiaEmailCriarController::class);
+    Route::get('copias-email', CopiaEmailListarController::class);
 });
