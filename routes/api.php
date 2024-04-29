@@ -43,11 +43,6 @@ Route::post('reset', [AuthController::class, 'reset']);
 
 
 Route::middleware('auth:api')->group(function () {
-    Route::get('usuarios', UsuarioListarController::class);
-    Route::post('usuario/{id}', EditarController::class);
-    Route::delete('usuario/{id}', ExcluirController::class);
-
-
     Route::post('solicitar-cancelamento', ListarController::class);
     Route::get('cancelamentos', CancelamentoListarController::class);
     Route::post('fazer-cancelamento', CriarController::class);
@@ -55,8 +50,12 @@ Route::middleware('auth:api')->group(function () {
     Route::get('termos-cancelamento', TermoCancelamentoListarController::class);
     Route::post('termo-cancelamento', TermoCancelamentoCriarController::class);
 
-    Route::get('copias-email', CopiaEmailListarController::class);
-    Route::post('copia-email', CopiaEmailCriarController::class);
-    Route::post('copia-email/{id}', CopiaEmailEditarController::class);
-    Route::delete('copia-email/{id}', CopiaEmailEditarController::class);
+    Route::get('usuarios', UsuarioListarController::class)->middleware('admin');
+    Route::post('usuario/{id}', EditarController::class)->middleware('admin');
+    Route::delete('usuario/{id}', ExcluirController::class)->middleware('admin');
+    
+    Route::get('copias-email', CopiaEmailListarController::class)->middleware('admin');
+    Route::post('copia-email', CopiaEmailCriarController::class)->middleware('admin');
+    Route::post('copia-email/{id}', CopiaEmailEditarController::class)->middleware('admin');
+    Route::delete('copia-email/{id}', CopiaEmailEditarController::class)->middleware('admin');
 });
