@@ -55,7 +55,8 @@ Route::middleware('auth:api')->group(function () {
     Route::get('termos-cancelamento', TermoCancelamentoListarController::class);
     Route::post('termo-cancelamento', TermoCancelamentoCriarController::class);
 
+    Route::get('copias-email', CopiaEmailListarController::class);
     Route::post('copia-email', CopiaEmailCriarController::class);
     Route::post('copia-email/{id}', CopiaEmailEditarController::class);
-    Route::get('copias-email', CopiaEmailListarController::class);
+    Route::delete('copia-email/{id}', CopiaEmailEditarController::class);
 });
