@@ -13,7 +13,8 @@ class TermoCancelamento extends Model
 
     protected $fillable = [
         'caminho_termo',
-        'users_id'
+        'users_id',
+        'situacao'
     ];
 
     public $timestamps = true;

@@ -20,7 +20,10 @@ class CriarController
         $nomeDoArquivo = $this->gerarNomeParaArquivo();
         $this->geraArquivoHtml($nomeDoArquivo, $dadosDoFormulario);
         try{
-            $this->salvaTermoCancelamentoNoBancoDeDados($nomeDoArquivo);
+            $this->salvaTermoCancelamentoNoBancoDeDados($nomeDoArquivo, $dadosDoFormulario->input('situacao'));
+            return response()->json([
+                "message" => "Criado com sucesso"
+            ]);
         }catch(\Exception $error){
             return response()->json([
                 "error" => $error
@@ -38,9 +41,10 @@ class CriarController
         file_put_contents($nomeDoArquivo,$request->input('html'));
     }
 
-    private function salvaTermoCancelamentoNoBancoDeDados($nomeDoArquivo){
+    private function salvaTermoCancelamentoNoBancoDeDados($nomeDoArquivo, $situacao){
         TermoCancelamento::insert([
             'caminho_termo' => "storage/termosCancelamento/$nomeDoArquivo",
+            'situacao' => $situacao,
             'users_id' => Auth::user()->id
         ]);
     }

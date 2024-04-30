@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('termos_de_cancelamento', function (Blueprint $table) {
             $table->id();
             $table->string('caminho_termo');
+            $table->integer('situacao');
             $table->unsignedBigInteger('users_id');
             $table->timestamps();
-
             $table->foreign('users_id')->references('id')->on('users');
         });
     }
