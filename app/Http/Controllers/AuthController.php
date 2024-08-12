@@ -68,7 +68,7 @@ class AuthController extends BaseController
 
     public function forgot(Request $request)
     {
-        DB::setDefaultConnection('SegundaVia');
+        DB::setDefaultConnection('Cancelamento');
         $validator = Validator::make($request->all(), [
             'email' => 'required|email'
         ]);
@@ -79,33 +79,23 @@ class AuthController extends BaseController
 
         $email = $request->input('email');
 
-        /*
-        if (User::where('email', $email)->doesntExists()) {
-            return response(
-                [
-                    'message' => 'User doen\'t exists!',
-
-                ],
-                404
-            );*/
-
-            $token = Str::random(10);
-        try{
-            DB::connection('SegundaVia')->table('password_reset_tokens')->insert([
+        $token = Str::random(10);
+        try {
+            DB::connection('Cancelamento')->table('password_reset_tokens')->insert([
                 'email' => $email,
                 'token' => $token
             ]);
-        }catch(\Exception $exception){
-            if(Str::contains($exception->getMessage(),'insert duplicate')){
-                DB::connection('SegundaVia')->table('password_reset_tokens')->where('email', $email)->update([
+
+        } catch (\Exception $exception) {
+            if (Str::contains($exception->getMessage(), 'insert duplicate')) {
+                DB::connection('Cancelamento')->table('password_reset_tokens')->where('email', $email)->update([
                     'token' => $token
                 ]);
             }
-
         }
 
         try {
-            Mail::send('Mails.forgot', ['token'=>$token], function(MailMessage $message) use ($email){
+            Mail::send('Mails.forgot', ['token' => $token], function (MailMessage $message) use ($email) {
                 $message->to($email);
                 $message->subject('Alterar senha');
             });
@@ -113,7 +103,6 @@ class AuthController extends BaseController
             return response([
                 'message' => 'Checked you email!'
             ]);
-
         } catch (\Exception $exception) {
             return response([
                 'message' => $exception->getMessage()
@@ -121,8 +110,9 @@ class AuthController extends BaseController
         }
     }
 
-    public function reset(Request $request){
-        DB::setDefaultConnection('SegundaVia');
+    public function reset(Request $request)
+    {
+        DB::setDefaultConnection('Cancelamento');
         $validator = Validator::make($request->all(), [
             'token' => 'required',
             'password' => 'required',
@@ -135,24 +125,24 @@ class AuthController extends BaseController
 
         $token = $request->input('token');
 
-        if(! $passwordResets = DB::connection('SegundaVia')->table('password_reset_tokens')->where('token', $token)->first()){
+        if (! $passwordResets = DB::connection('Cancelamento')->table('password_reset_tokens')->where('token', $token)->first()) {
             return response([
                 'message' => 'Invalid token!'
-            ],400);
+            ], 400);
         }
 
-        if(!$user = DB::connection('SegundaVia')->table('users')->where('email', $passwordResets->email)->first()){
+        if (!$user = DB::connection('Cancelamento')->table('users')->where('email', $passwordResets->email)->first()) {
             return response([
                 'message' => 'User does\'t exist!'
             ], 404);
         }
 
-        $password= Hash::make($request->input('password'));
+        $password = Hash::make($request->input('password'));
 
 
-        if(DB::connection('SegundaVia')->table('users')->where('id', $user->id)->update(['password' => $password])){
+        if (DB::connection('Cancelamento')->table('users')->where('id', $user->id)->update(['password' => $password])) {
             return response([
-                'message'=> 'sucess'
+                'message' => 'sucess'
             ]);
         }
     }

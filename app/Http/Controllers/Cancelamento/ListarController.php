@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Cancelamento;
 use App\Http\Controllers\Controller;
 use App\Models\Cancelamento;
 use Lorisleiva\Actions\Concerns\AsAction;
+use MarvinLabs\DiscordLogger\Logger;
 
 class ListarController
 {
@@ -12,9 +13,13 @@ class ListarController
 
     public function __invoke()
     {
-        $cancelamentos = Cancelamento::all();
-        return response()->json([
-            'cancelamentos' => $cancelamentos
-        ]);
+        try {
+            $cancelamentos = Cancelamento::all();
+            return response()->json([
+                'cancelamentos' => $cancelamentos
+            ]);
+        } catch (\Exception $error) {
+            logs()->emergency("teste", [1,2,3]);
+        }
     }
 }

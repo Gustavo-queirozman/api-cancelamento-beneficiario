@@ -1,0 +1,16 @@
+name: name
+recipe: laravel
+config:
+  type: php:8.1
+  webroot: public
+  via: nginx
+  database: mssql:2019-latest
+  cache: redis
+services:
+  mssql:
+    type: mssql:2019-latest
+    creds:
+      host: 10.244.216.227
+      port: 1433
+      user: user.app
+      password: ti.paracatu@226
