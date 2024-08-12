@@ -13,7 +13,6 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "lorisleiva/laravel-actions": "^2.8",
-        "marvinlabs/laravel-discord-logger": "^1.4",
         "openboleto/openboleto": "^1.0"
     },
     "require-dev": {

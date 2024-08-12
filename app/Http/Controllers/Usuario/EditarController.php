@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 
-class EditarController extends Controller
+class EditarController
 {
     use AsAction;
 
@@ -15,7 +15,7 @@ class EditarController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+            'email' => 'required|string|email|unique:users|max:255',
             'password' => 'required|string|min:8',
             'is_admin' => 'boolean',
             'blocked' => 'boolean',
