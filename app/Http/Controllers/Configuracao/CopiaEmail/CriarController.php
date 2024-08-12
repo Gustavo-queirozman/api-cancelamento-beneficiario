@@ -29,6 +29,7 @@ class CriarController
             $copiaEmail = new CopiaEmail();
             $copiaEmail->fill($validaDados);
             $copiaEmail->users_id = Auth::user()->id;
+            $copiaEmail->timestamps = true;
             $copiaEmail->save();
 
             return response()->json([
