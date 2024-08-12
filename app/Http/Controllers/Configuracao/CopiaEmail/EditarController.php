@@ -24,31 +24,35 @@ class EditarController
             ], 404);
         }
 
-        try{
+        try {
             $this->editaConfiguracaoCopiaEmailNoBancoDeDados($dadosDoFormulario);
             return response()->json([
                 "message" => "Configuração editada com sucesso!"
             ]);
-        }catch(\Exception $error){
+        } catch (\Exception $error) {
             return response()->json([
-                "error" => $error
-            ]);
+                "error" => $error->getMessage()
+            ], 500);
         }
     }
 
-    private function validaDados($dadosDoFormulario){
-        return $dadosDoFormulario->validate([
+    private function validaDados($dadosDoFormulario)
+    {
+        $dadosDoFormulario->validate([
             'nome' => 'required|max:255',
-            'email' => 'required|email|unique:copias_de_email|max:256',
+            'email' => 'required|email|unique:copias_de_email,email,' . $dadosDoFormulario->input('id') . '|max:256',
             'situacao' => 'required|integer|between:0,1'
         ]);
     }
 
-    private function pesquisaConfiguracaoCopiaEmail($id){
+    private function pesquisaConfiguracaoCopiaEmail($id)
+    {
         $this->copiaEmail = CopiaEmail::find($id);
+        return $this->copiaEmail !== null;
     }
 
-    private function editaConfiguracaoCopiaEmailNoBancoDeDados($dadosDoFormulario){
+    private function editaConfiguracaoCopiaEmailNoBancoDeDados($dadosDoFormulario)
+    {
         $this->copiaEmail->nome = $dadosDoFormulario->input('nome');
         $this->copiaEmail->email = $dadosDoFormulario->input('email');
         $this->copiaEmail->situacao = $dadosDoFormulario->input('situacao');

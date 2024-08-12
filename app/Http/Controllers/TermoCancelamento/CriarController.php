@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class CriarController
@@ -45,7 +46,9 @@ class CriarController
         TermoCancelamento::insert([
             'caminho_termo' => "storage/termosCancelamento/$nomeDoArquivo",
             'situacao' => $situacao,
-            'users_id' => Auth::user()->id
+            'users_id' => Auth::user()->id,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
     }
 }
