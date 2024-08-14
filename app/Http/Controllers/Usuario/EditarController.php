@@ -18,7 +18,7 @@ class EditarController
             'email' => 'required|string|email|unique:users|max:255',
             'password' => 'required|string|min:8',
             'is_admin' => 'boolean',
-            'blocked' => 'boolean',
+            'enable' => 'boolean',
         ]);
 
         // Encontre o usuário pelo ID fornecido
