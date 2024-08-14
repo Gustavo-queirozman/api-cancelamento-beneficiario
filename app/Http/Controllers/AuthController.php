@@ -56,6 +56,9 @@ class AuthController extends BaseController
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
+            if(!$user->enable){
+                return response()->json(['message' => 'Usuário bloqueado!'],202);
+            }
             $success['token'] =  $user->createToken('MyApp')->accessToken;
             $success['name'] =  $user->name;
 
