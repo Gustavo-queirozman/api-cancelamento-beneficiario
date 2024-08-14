@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Illuminate\Support\Str;
-
+use Carbon\Carbon;
 class CriarController
 {
     use AsAction;
@@ -44,6 +44,7 @@ class CriarController
         $cancelamento = $request->all();
         $cancelamento['users_id'] = Auth::user()->id;
         $cancelamento['termos_cancelamento_id'] =  $idTermoCancelamento;
+        $cancelamento['protocolo'] = Carbon::now()->format('Ymdisu');
         $cancelamento = Cancelamento::create($cancelamento);
 
         foreach ($beneficiarios as $beneficiario) {
