@@ -1,0 +1,829 @@
+{
+	"info": {
+		"_postman_id": "e2ed3b29-1585-481e-9955-0cb15acb5d89",
+		"name": "API - Cancelamento",
+		"description": "API para cancelamento de beneficiários.\n\n**1° Passo -** Realizar autenticação.\n\n**2° Passo -** Pesquisar beneficiários.\n\n**3° Passo -** Enviar carteirinhas e demais informações para realizar cancelamento.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15895270",
+		"_collection_link": "https://hubblesoftwares.postman.co/workspace/Unimed~9a0bbae6-e1f3-4ca2-9327-65ed29c471cd/collection/15895270-e2ed3b29-1585-481e-9955-0cb15acb5d89?action=share&source=collection_link&creator=15895270"
+	},
+	"item": [
+		{
+			"name": "Autenticação",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=utf-8",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=utf8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"gustavoqueiromitsd@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/login",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Esqueci minha senha",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=utf-8",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "gustavoqueirozmit@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/forgot",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"forgot"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar senha",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=utf-8",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "1NLPjXlMhR",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "c_password",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/reset",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"reset"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Registro",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=utf-8",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"gustavo\",\r\n    \"email\": \"gustavoqueiroz071@gmail.com\",\r\n    \"password\": \"1234\",\r\n    \"c_password\": \"1234\",\r\n    \"is_admin\": 1,\r\n    \"enable\": 1\r\n}"
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/register",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=utf8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL_BASE}}/api/usuarios",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=utf8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"gustavo queiroz\",\r\n    \"email\": \"gustavoqueiromit@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"is_admin\": 1,\r\n    \"enable\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/usuario/1",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=utf8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/usuario/7",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"usuario",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Nova solicitação",
+			"item": [
+				{
+					"name": "Pesquisa beneficiário",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Contet-Type",
+								"value": "application/json;charset=utf8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "codigoCarteirinha",
+									"value": "2267004000193004",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/solicitar-cancelamento",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"solicitar-cancelamento"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cancelamento",
+			"item": [
+				{
+					"name": "Faz cancelamento",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=utf8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "carteirinha1",
+									"value": "2267004000193004",
+									"type": "text"
+								},
+								{
+									"key": "carteirinha2",
+									"value": "2267004000193012",
+									"type": "text"
+								},
+								{
+									"key": "carteirinha3",
+									"value": "2267004000193306",
+									"type": "text"
+								},
+								{
+									"key": "contrato",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "motivo",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "situacao_cancelamento",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "dgdg@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "aceitou_termo_cancelamento",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "ddd",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "telefone",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "observacao",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "tipos_de_atendimento_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/fazer-cancelamento",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"fazer-cancelamento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=utf8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL_BASE}}/api/cancelamentos",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"cancelamentos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Configuração copia de e-mail",
+			"item": [
+				{
+					"name": "Criar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=utf8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "nome",
+									"value": "thiago",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "suporteti30@unimeadnoroesteminas.coop.br",
+									"type": "text"
+								},
+								{
+									"key": "situacao",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/copia-email",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"copia-email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_BASE}}/api/copias-email",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"copias-email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=utf8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"gustavo\",\r\n    \"email\": \"gustavoqueirozmit@gmail.com\",\r\n    \"situacao\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/copia-email/5",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"copia-email",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=utf8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/copia-email/6",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"copia-email",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Termos de cancelamento",
+			"item": [
+				{
+					"name": "Criar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=utf8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "html",
+									"value": "<p>jasasjld jsadjasjk kjasjsdjk kjsajkdjkas</p>",
+									"type": "text"
+								},
+								{
+									"key": "situacao",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/termo-cancelamento",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"termo-cancelamento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=utf8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL_BASE}}/api/termos-cancelamento",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"termos-cancelamento"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "URL_BASE",
+			"value": "http://192.168.0.159:34"
+		}
+	]
+}

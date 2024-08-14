@@ -14,9 +14,9 @@ class EditarController
     public function __invoke(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|unique:users|max:255',
-            'password' => 'required|string|min:8',
+            'name' => 'string|max:255',
+            'email' => 'string|email|unique:users|max:255',
+            'password' => 'string|min:8',
             'is_admin' => 'boolean',
             'enable' => 'boolean',
         ]);
@@ -36,7 +36,7 @@ class EditarController
         $usuario->email = $request->input('email');
         $usuario->password = bcrypt($request->input('password'));
         $usuario->is_admin = $request->input('is_admin', false);
-        $usuario->blocked = $request->input('blocked', false);
+        $usuario->enable = $request->input('enable', false);
         $usuario->save();
 
         return response()->json([
