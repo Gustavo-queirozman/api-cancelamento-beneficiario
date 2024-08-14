@@ -31,7 +31,7 @@ class AuthController extends BaseController
             'password' => 'required',
             'c_password' => 'required|same:password',
             'is_admin' => 'required',
-            'blocked' => 'required'
+            'enable' => 'required|boolean'
         ]);
 
         if ($validator->fails()) {
