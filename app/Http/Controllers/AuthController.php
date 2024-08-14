@@ -24,6 +24,9 @@ class AuthController extends BaseController
      */
     public function register(Request $request): JsonResponse
     {
+        if(!Auth::user()->is_admin){
+            return response()->json(['error' => "Não autorizado"],403);
+        }
 
         $validator = Validator::make($request->all(), [
             'name' => 'required',

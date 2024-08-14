@@ -11,7 +11,7 @@ class AdminMiddleware
             return $next($request);
         }
 
-        return response()->json(['error' => "Unauthorized"],403);
+        return response()->json(['error' => "Não autorizado"],403);
     }
 
 }
