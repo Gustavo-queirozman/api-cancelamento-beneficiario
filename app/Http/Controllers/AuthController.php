@@ -35,7 +35,7 @@ class AuthController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->sendError('Validation Error.', $validator->errors());
+            return $this->sendError('Erro de Validação.', $validator->errors());
         }
 
         $input = $request->all();
@@ -44,7 +44,7 @@ class AuthController extends BaseController
         $success['token'] =  $user->createToken('MyApp')->accessToken;
         $success['name'] =  $user->name;
 
-        return $this->sendResponse($success, 'User register successfully.');
+        return $this->sendResponse($success, 'Usuário registrado com sucesso.');
     }
 
     /**
@@ -60,7 +60,7 @@ class AuthController extends BaseController
             $success['name'] =  $user->name;
 
             session()->put('cnp', $user->cnp);
-            return $this->sendResponse($success, 'User login successfully.');
+            return $this->sendResponse($success, 'Usuário logado com sucesso.');
         } else {
             return $this->sendError('Usuário ou senha incorretos', ['error' => 'Usuário ou senha incorretos']);
         }
@@ -74,7 +74,7 @@ class AuthController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->sendError('Validation Error.', $validator->errors());
+            return $this->sendError('Erro de validação.', $validator->errors());
         }
 
         $email = $request->input('email');
@@ -120,20 +120,20 @@ class AuthController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->sendError('Validation Error.', $validator->errors());
+            return $this->sendError('Erro de validação.', $validator->errors());
         }
 
         $token = $request->input('token');
 
         if (! $passwordResets = DB::connection('Cancelamento')->table('password_reset_tokens')->where('token', $token)->first()) {
             return response([
-                'message' => 'Invalid token!'
+                'message' => 'Token inválido!'
             ], 400);
         }
 
         if (!$user = DB::connection('Cancelamento')->table('users')->where('email', $passwordResets->email)->first()) {
             return response([
-                'message' => 'User does\'t exist!'
+                'message' => 'Usuário não existe!'
             ], 404);
         }
 
@@ -142,7 +142,7 @@ class AuthController extends BaseController
 
         if (DB::connection('Cancelamento')->table('users')->where('id', $user->id)->update(['password' => $password])) {
             return response([
-                'message' => 'sucess'
+                'message' => 'Sucesso'
             ]);
         }
     }
