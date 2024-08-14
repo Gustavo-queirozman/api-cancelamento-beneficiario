@@ -101,7 +101,7 @@ class AuthController extends BaseController
             });
 
             return response([
-                'message' => 'Checked you email!'
+                'message' => 'Verifique seu e-mail!'
             ]);
         } catch (\Exception $exception) {
             return response([
