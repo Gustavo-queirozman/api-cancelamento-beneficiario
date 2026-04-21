@@ -23,10 +23,8 @@ Esta API foi construída para centralizar e automatizar o processo de cancelamen
 
 - PHP 8.1
 - Laravel 10
-- Laravel Passport
 - Laravel Sanctum
 - Guzzle
-- PHPUnit
 - Vite
 - SQL Server (via driver PDO SQLSRV)
 
