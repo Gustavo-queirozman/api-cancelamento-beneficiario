@@ -1,16 +1,73 @@
-1° Instale o php versão 8.1 NTS (Non Thread Safe) <br>
-https://windows.php.net/download#php-8.1 <br>
-2° Instale o composer  <br>
-https://getcomposer.org/download/ <br>
-3° Instale o laravel globalmente <br>
-composer global require laravel/installer <br>
-4° Localize o php.ini e insira a seguinte extensão no arquivo <br>
-extension=php_pdo_sqlsrv_81_nts_x64 <br>
-5° Baixe drivers para fazer a conexão do php com o banco de dados <br>
-https://learn.microsoft.com/pt-br/sql/connect/php/download-drivers-php-sql-server?view=sql-server-ver16 <br>
-6° Abra o projeto no cmd e execute o seguinte comando <br>
-composer install <br>
-7° Posteriormente, execute esse comando no cmd para configurar o projeto <br>
-copy .env.example .env <br>
-8° Para executar o projeto, setando o host a aplicação poderá ser acessada de outro dispositivo na rede <br>
-php artisan serve --host=192.168.0.159 --port=80 <br>
+# API de Cancelamento de Beneficiário
+
+API desenvolvida para gerenciar o fluxo de cancelamento de beneficiários em uma cooperativa de saúde.
+
+O projeto contempla autenticação de usuários, cadastro e gerenciamento de usuários, consulta prévia de beneficiário para solicitação de cancelamento, efetivação do cancelamento e configuração de e-mails em cópia para acompanhamento do processo.
+
+---
+
+## Visão geral
+
+Esta API foi construída para centralizar e automatizar o processo de cancelamento de beneficiários, oferecendo uma camada de integração para:
+
+- autenticação de usuários
+- gerenciamento de usuários do sistema
+- consulta de beneficiário antes do cancelamento
+- registro de solicitações de cancelamento
+- listagem de cancelamentos realizados
+- configuração de destinatários para cópia de e-mails
+
+---
+
+## Tecnologias utilizadas
+
+- PHP 8.1
+- Laravel 10
+- Laravel Passport
+- Laravel Sanctum
+- Guzzle
+- PHPUnit
+- Vite
+- SQL Server (via driver PDO SQLSRV)
+
+---
+
+## Funcionalidades
+
+### Autenticação
+- login
+- alteração/redefinição de credenciais
+
+### Usuários
+- registro de usuário
+- listagem de usuários
+- edição de usuário
+- exclusão de usuário
+
+### Cancelamento de beneficiário
+- pesquisa de beneficiário por código de carteirinha
+- solicitação de cancelamento
+- efetivação do cancelamento
+- listagem de cancelamentos
+
+### Configuração de cópia de e-mail
+- criação de destinatários
+- listagem de destinatários
+- edição de destinatários
+- exclusão de destinatários
+
+---
+
+## Estrutura do projeto
+
+```bash
+app/
+bootstrap/
+config/
+database/
+lang/
+public/
+resources/
+routes/
+storage/
+tests/
